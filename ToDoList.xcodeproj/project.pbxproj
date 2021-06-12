@@ -10,6 +10,8 @@
 		144B91F4EA4C2D63B5D3FC39 /* Pods_ToDoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC65DC66A63EE11BBC0D8AE4 /* Pods_ToDoList.framework */; };
 		2BCB5ECA44ADBD255FE25000 /* Pods_ToDoListTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008E381E2A64196A9E4B62C1 /* Pods_ToDoListTests.framework */; };
 		32C677E901EC519377634071 /* Pods_ToDoList_ToDoListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5F07BE32725B845DA0684F /* Pods_ToDoList_ToDoListUITests.framework */; };
+		5C74B37C2674B4E400DACE53 /* ToDoItemPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */; };
+		5C74B37F2674BB7200DACE53 /* Date+Intervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */; };
 		5CBAC51A266A2D1000824112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC519266A2D1000824112 /* AppDelegate.swift */; };
 		5CBAC51C266A2D1000824112 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC51B266A2D1000824112 /* SceneDelegate.swift */; };
 		5CBAC51E266A2D1000824112 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC51D266A2D1000824112 /* ViewController.swift */; };
@@ -18,6 +20,9 @@
 		5CBAC526266A2D1100824112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBAC524266A2D1100824112 /* LaunchScreen.storyboard */; };
 		5CBAC531266A2D1100824112 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC530266A2D1100824112 /* ToDoListTests.swift */; };
 		5CBAC53C266A2D1100824112 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC53B266A2D1100824112 /* ToDoListUITests.swift */; };
+		5CC4CDD9266F8A020066DE74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDB266F8A020066DE74 /* Localizable.strings */; };
+		5CC4CDDE26700C4C0066DE74 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */; };
+		5CC4CDE0267394300066DE74 /* ToDoItem+ParsingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,8 @@
 /* Begin PBXFileReference section */
 		008E381E2A64196A9E4B62C1 /* Pods_ToDoListTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoListTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0351130C41622DBC9CF260 /* Pods-ToDoList-ToDoListUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList-ToDoListUITests.release.xcconfig"; path = "Target Support Files/Pods-ToDoList-ToDoListUITests/Pods-ToDoList-ToDoListUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemPriority.swift; sourceTree = "<group>"; };
+		5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Intervals.swift"; sourceTree = "<group>"; };
 		5CBAC516266A2D1000824112 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBAC519266A2D1000824112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CBAC51B266A2D1000824112 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +61,11 @@
 		5CBAC537266A2D1100824112 /* ToDoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBAC53B266A2D1100824112 /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
 		5CBAC53D266A2D1100824112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CC4CDD5266F7E2E0066DE74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		5CC4CDD6266F7E2E0066DE74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5CC4CDDC266F8A0C0066DE74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoItem+ParsingJson.swift"; sourceTree = "<group>"; };
 		5E5F07BE32725B845DA0684F /* Pods_ToDoList_ToDoListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoList_ToDoListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3F3C4E8799EBFFB08446D0 /* Pods-ToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList.release.xcconfig"; path = "Target Support Files/Pods-ToDoList/Pods-ToDoList.release.xcconfig"; sourceTree = "<group>"; };
 		91A608A1916B74C6D8FBC5B5 /* Pods-ToDoListTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoListTests.debug.xcconfig"; path = "Target Support Files/Pods-ToDoListTests/Pods-ToDoListTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C74B37A2674A54A00DACE53 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */,
+				5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */,
+				5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5C74B37D2674BB6000DACE53 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5CBAC50D266A2D1000824112 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +146,8 @@
 		5CBAC518266A2D1000824112 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				5C74B37D2674BB6000DACE53 /* Utils */,
+				5C74B37A2674A54A00DACE53 /* Model */,
 				5CBAC519266A2D1000824112 /* AppDelegate.swift */,
 				5CBAC51B266A2D1000824112 /* SceneDelegate.swift */,
 				5CBAC51D266A2D1000824112 /* ViewController.swift */,
@@ -123,6 +155,7 @@
 				5CBAC522266A2D1100824112 /* Assets.xcassets */,
 				5CBAC524266A2D1100824112 /* LaunchScreen.storyboard */,
 				5CBAC527266A2D1100824112 /* Info.plist */,
+				5CC4CDDB266F8A020066DE74 /* Localizable.strings */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -257,6 +290,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 5CBAC50D266A2D1000824112;
 			productRefGroup = 5CBAC517266A2D1000824112 /* Products */;
@@ -276,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CBAC526266A2D1100824112 /* LaunchScreen.storyboard in Resources */,
+				5CC4CDD9266F8A020066DE74 /* Localizable.strings in Resources */,
 				5CBAC523266A2D1100824112 /* Assets.xcassets in Resources */,
 				5CBAC521266A2D1000824112 /* Main.storyboard in Resources */,
 			);
@@ -313,7 +348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		7F4049E898F2F33B05B3E8EE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -388,8 +423,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C74B37C2674B4E400DACE53 /* ToDoItemPriority.swift in Sources */,
+				5CC4CDE0267394300066DE74 /* ToDoItem+ParsingJson.swift in Sources */,
 				5CBAC51E266A2D1000824112 /* ViewController.swift in Sources */,
 				5CBAC51A266A2D1000824112 /* AppDelegate.swift in Sources */,
+				5C74B37F2674BB7200DACE53 /* Date+Intervals.swift in Sources */,
+				5CC4CDDE26700C4C0066DE74 /* ToDoItem.swift in Sources */,
 				5CBAC51C266A2D1000824112 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +469,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5CBAC520266A2D1000824112 /* Base */,
+				5CC4CDD5266F7E2E0066DE74 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -438,8 +478,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				5CBAC525266A2D1100824112 /* Base */,
+				5CC4CDD6266F7E2E0066DE74 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5CC4CDDB266F8A020066DE74 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CC4CDDC266F8A0C0066DE74 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -449,6 +498,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -510,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
