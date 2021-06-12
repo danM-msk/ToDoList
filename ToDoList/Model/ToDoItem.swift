@@ -39,3 +39,11 @@ struct ToDoItem {
         return UUID().uuidString
     }
 }
+
+extension ToDoItem: Equatable {
+    
+    static func ==(first: ToDoItem, second: ToDoItem) -> Bool {
+        return first.id == second.id && first.text == second.text && first.priority == second.priority && first.deadline == second.deadline
+    }
+    
+}

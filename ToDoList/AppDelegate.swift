@@ -11,12 +11,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let now = Date()
-        let weekAfter = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: now)
-        
-        let todoItem = ToDoItem(text: "content here", priority: .Unimportant, deadline: weekAfter)
-        
-        let jsonToDoItem = todoItem.json
         return true
     }
 

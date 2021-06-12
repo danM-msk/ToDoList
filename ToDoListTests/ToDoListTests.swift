@@ -18,9 +18,24 @@ class ToDoListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testJsonEncodeAndDecode() throws {
+        let now = Date()
+        let weekAfter = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: now)
+        
+        let todoItem = ToDoItem(text: "content here", priority: .Unimportant, deadline: weekAfter)
+        let jsonToDoItem = todoItem.json
+        let secondTodoItem = ToDoItem.parse(json: jsonToDoItem)
+        XCTAssertNotNil(secondTodoItem)
+        
+        XCTAssertEqual(secondTodoItem == todoItem, true)
+        print(todoItem.id)
+        print(secondTodoItem!.id)
+        print(todoItem.text)
+        print(secondTodoItem!.text)
+        print(todoItem.priority)
+        print(secondTodoItem!.priority)
+        print(todoItem.deadline?.timeIntervalSince1970)
+        print(secondTodoItem!.deadline?.timeIntervalSince1970)
     }
 
     func testPerformanceExample() throws {

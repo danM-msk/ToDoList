@@ -12,6 +12,8 @@
 		32C677E901EC519377634071 /* Pods_ToDoList_ToDoListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5F07BE32725B845DA0684F /* Pods_ToDoList_ToDoListUITests.framework */; };
 		5C74B37C2674B4E400DACE53 /* ToDoItemPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */; };
 		5C74B37F2674BB7200DACE53 /* Date+Intervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */; };
+		5C74B3812674D21600DACE53 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B3802674D21600DACE53 /* JSONable.swift */; };
+		5C74B3832674DA4800DACE53 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B3822674DA4800DACE53 /* FileCache.swift */; };
 		5CBAC51A266A2D1000824112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC519266A2D1000824112 /* AppDelegate.swift */; };
 		5CBAC51C266A2D1000824112 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC51B266A2D1000824112 /* SceneDelegate.swift */; };
 		5CBAC51E266A2D1000824112 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC51D266A2D1000824112 /* ViewController.swift */; };
@@ -22,7 +24,7 @@
 		5CBAC53C266A2D1100824112 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAC53B266A2D1100824112 /* ToDoListUITests.swift */; };
 		5CC4CDD9266F8A020066DE74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDB266F8A020066DE74 /* Localizable.strings */; };
 		5CC4CDDE26700C4C0066DE74 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */; };
-		5CC4CDE0267394300066DE74 /* ToDoItem+ParsingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */; };
+		5CC4CDE0267394300066DE74 /* ToDoItem+JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4CDDF267394300066DE74 /* ToDoItem+JSONable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		0A0351130C41622DBC9CF260 /* Pods-ToDoList-ToDoListUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList-ToDoListUITests.release.xcconfig"; path = "Target Support Files/Pods-ToDoList-ToDoListUITests/Pods-ToDoList-ToDoListUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemPriority.swift; sourceTree = "<group>"; };
 		5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Intervals.swift"; sourceTree = "<group>"; };
+		5C74B3802674D21600DACE53 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
+		5C74B3822674DA4800DACE53 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		5CBAC516266A2D1000824112 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBAC519266A2D1000824112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CBAC51B266A2D1000824112 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +69,7 @@
 		5CC4CDD6266F7E2E0066DE74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5CC4CDDC266F8A0C0066DE74 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
-		5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoItem+ParsingJson.swift"; sourceTree = "<group>"; };
+		5CC4CDDF267394300066DE74 /* ToDoItem+JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoItem+JSONable.swift"; sourceTree = "<group>"; };
 		5E5F07BE32725B845DA0684F /* Pods_ToDoList_ToDoListUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoList_ToDoListUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3F3C4E8799EBFFB08446D0 /* Pods-ToDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoList.release.xcconfig"; path = "Target Support Files/Pods-ToDoList/Pods-ToDoList.release.xcconfig"; sourceTree = "<group>"; };
 		91A608A1916B74C6D8FBC5B5 /* Pods-ToDoListTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoListTests.debug.xcconfig"; path = "Target Support Files/Pods-ToDoListTests/Pods-ToDoListTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,8 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				5CC4CDDD26700C4C0066DE74 /* ToDoItem.swift */,
-				5CC4CDDF267394300066DE74 /* ToDoItem+ParsingJson.swift */,
+				5CC4CDDF267394300066DE74 /* ToDoItem+JSONable.swift */,
 				5C74B37B2674B4E400DACE53 /* ToDoItemPriority.swift */,
+				5C74B3822674DA4800DACE53 /* FileCache.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				5C74B37E2674BB7200DACE53 /* Date+Intervals.swift */,
+				5C74B3802674D21600DACE53 /* JSONable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -424,9 +430,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C74B37C2674B4E400DACE53 /* ToDoItemPriority.swift in Sources */,
-				5CC4CDE0267394300066DE74 /* ToDoItem+ParsingJson.swift in Sources */,
+				5CC4CDE0267394300066DE74 /* ToDoItem+JSONable.swift in Sources */,
 				5CBAC51E266A2D1000824112 /* ViewController.swift in Sources */,
 				5CBAC51A266A2D1000824112 /* AppDelegate.swift in Sources */,
+				5C74B3832674DA4800DACE53 /* FileCache.swift in Sources */,
+				5C74B3812674D21600DACE53 /* JSONable.swift in Sources */,
 				5C74B37F2674BB7200DACE53 /* Date+Intervals.swift in Sources */,
 				5CC4CDDE26700C4C0066DE74 /* ToDoItem.swift in Sources */,
 				5CBAC51C266A2D1000824112 /* SceneDelegate.swift in Sources */,

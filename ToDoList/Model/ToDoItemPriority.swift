@@ -7,28 +7,28 @@
 
 import Foundation
 
-protocol Jsonable {
-    func toJsonValue() -> String
-    func fromJsonString(_ jsonString: String) -> Self?
-}
-
-enum ToDoItemPriority: Jsonable {
+enum ToDoItemPriority: JSONable {
     case Default
     case Unimportant
     case Important
     
-    func toJsonValue() -> String {
-        switch self {
-        case .Important:
-            return "important"
-        case .Unimportant:
-            return "unimportant"
-        default:
-            return "null"
+    var json: Any {
+        get {
+            switch self {
+            case .Important:
+                return "important"
+            case .Unimportant:
+                return "unimportant"
+            default:
+                return "null"
+            }
         }
     }
     
-    func fromJsonString(_ jsonString: String) -> ToDoItemPriority? {
+    static func parse(json: Any) -> ToDoItemPriority? {
+        guard let jsonString = json as? String else {
+            return nil
+        }
         switch jsonString {
         case "important":
             return .Important
