@@ -10,9 +10,13 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var createTaskButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        iconImage.layer.cornerRadius = 8.0
+        createTaskButton.layer.cornerRadius = 8.0
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         if let unwrapped = appVersion {
             _ = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -22,7 +26,7 @@ class ViewController: UIViewController {
             textLabel.text = "Build number is unavailable"
         }
 
-        iconView.image = UIImage(named: "AppIcon")
+        iconImage.image = UIImage(named: "AppIcon")
     }
 
 }

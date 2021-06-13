@@ -8,6 +8,7 @@
 import Foundation
 
 class FileCache {
+    static let instance = FileCache()
     private var cache: [ToDoItem]? = nil
     
     public func addToDo(_ item: ToDoItem) {
@@ -50,12 +51,31 @@ class FileCache {
     }
     
     public func readFromLocalDirectory() {
-        NSKeyedUnarchiver.init(forReadingFrom: <#T##Data#>)
         
-        NSKeyedUnarchiver.unarchivedObject(ofClass: cache.self, from: <#T##Data#>)
+        var readData: Data? = nil
+        
+        let fm = FileManager.default
+        let path = Bundle.main.resourcePath!
+
         do {
-            if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String] {
-                savedArray = loadedStrings
+            let items = try fm.contentsOfDirectory(atPath: path)
+
+            
+            
+            for item in items {
+                
+                readData = item.data(using: .utf8)
+            }
+        } catch {
+            // failed to read directory – bad permissions, perhaps?
+        }
+        
+//        NSKeyedUnarchiver.init(forReadingFrom: <#T##Data#>)
+//
+//        NSKeyedUnarchiver.unarchivedObject(ofClass: cache.self, from: <#T##Data#>)
+        do {
+            if let data = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData!) as? ToDoItem {
+                cache?.append(data)
             }
         } catch {
             print("Couldn't read file.")

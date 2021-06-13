@@ -8,13 +8,15 @@
 import Foundation
 
 extension Date {
-    func addDays(_ numberOfDays: Int) -> Date {
+    func addDay(_ numberOfDays: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: numberOfDays, to: self)!
     }
     
-    func addWeeks(_ numberOfWeeks: Int) -> Date {
+    func addWeek(_ numberOfWeeks: Int) -> Date {
         return Calendar.current.date(byAdding: .weekOfYear, value: numberOfWeeks, to: self)!
     }
     
-    // TODO: add months
+    func addMonth(_ numberOfMonths: Int) -> Date {
+        return Calendar.current.date(byAdding: .month, value: numberOfMonths, to: self)!
+    }
 }

@@ -22,7 +22,7 @@ extension ToDoItem: JSONable {
                     itemDictionary["deadline"] = String(deadline.timeIntervalSince1970 / 100000 * 100000)
                 }
                 let jsonData = try JSONSerialization.data(withJSONObject: itemDictionary, options: [])
-                return String(data: jsonData, encoding: .utf8) ?? fatalError("json encoding failed")
+                return String(data: jsonData, encoding: .utf8) ?? print("json encoding failed")
             } catch let error {
                 print(error)
                 return error
