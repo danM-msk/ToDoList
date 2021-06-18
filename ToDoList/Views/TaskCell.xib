@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="79" id="KGk-i7-Jjw" customClass="TaskCell" customModule="ToDoList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDV-uG-K5o">
+                        <rect key="frame" x="6" y="17.5" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="OgE-Me-PCk"/>
+                            <constraint firstAttribute="width" constant="44" id="Yew-un-8R8"/>
+                        </constraints>
+                        <state key="normal" image="radioButtonDefault"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K2p-eJ-0sy">
+                        <rect key="frame" x="52" y="20.5" width="222" height="38.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poR-Zk-hgE">
+                                <rect key="frame" x="0.0" y="0.0" width="222" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUH-mP-XpJ">
+                                <rect key="frame" x="0.0" y="20.5" width="222" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc6-un-eff">
+                        <rect key="frame" x="276" y="17.5" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="9xR-J2-DdK"/>
+                            <constraint firstAttribute="width" constant="44" id="VGM-v1-Vr3"/>
+                        </constraints>
+                        <state key="normal" image="chevronButton"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="K2p-eJ-0sy" firstAttribute="leading" secondItem="JDV-uG-K5o" secondAttribute="trailing" constant="2" id="Auf-zZ-c8y"/>
+                    <constraint firstAttribute="trailing" secondItem="pc6-un-eff" secondAttribute="trailing" id="Mfs-ry-wfo"/>
+                    <constraint firstItem="JDV-uG-K5o" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sxv-8R-n7c"/>
+                    <constraint firstItem="JDV-uG-K5o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="XTs-hS-YNr"/>
+                    <constraint firstItem="K2p-eJ-0sy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b1s-Vc-egw"/>
+                    <constraint firstItem="pc6-un-eff" firstAttribute="leading" secondItem="K2p-eJ-0sy" secondAttribute="trailing" constant="2" id="mBH-VO-j0N"/>
+                    <constraint firstItem="pc6-un-eff" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pkY-j8-vVC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="FUH-mP-XpJ" id="N8b-rm-icW"/>
+                <outlet property="radioButton" destination="JDV-uG-K5o" id="pNZ-8h-dq2"/>
+                <outlet property="taskLabel" destination="poR-Zk-hgE" id="rpo-55-R6U"/>
+            </connections>
+            <point key="canvasLocation" x="37.681159420289859" y="115.51339285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevronButton" width="7" height="12"/>
+        <image name="radioButtonDefault" width="24" height="24"/>
+    </resources>
+</document>

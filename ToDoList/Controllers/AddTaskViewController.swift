@@ -1,5 +1,5 @@
 //
-//  TaskViewController.swift
+//  AddTaskViewController.swift
 //  ToDoList
 //
 //  Created by Daniyar Mamadov on 13.06.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
+class AddTaskViewController: UIViewController {
     
     var toDoItem: ToDoItem? = nil
     
@@ -23,6 +23,10 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureTitle()
+        
+        
         textField.layer.cornerRadius = 16.0
         optionsStackView.layer.cornerRadius = 16.0
         deleteButton.layer.cornerRadius = 16.0
@@ -71,5 +75,9 @@ class TaskViewController: UIViewController {
             separator2.isHidden = true
 
         }
+    }
+    
+    func configureTitle() {
+        title = "Дело"
     }
 }
