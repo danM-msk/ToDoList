@@ -7,17 +7,17 @@
 
 import Foundation
 
-enum ToDoItemPriority: JSONable {
-    case Default
-    case Unimportant
-    case Important
+enum ToDoItemPriority: JSONable, Equatable {
+    case normal
+    case unimportant
+    case important
     
-    var json: Any {
+    var json: Any? {
         get {
             switch self {
-            case .Important:
+            case .important:
                 return "important"
-            case .Unimportant:
+            case .unimportant:
                 return "unimportant"
             default:
                 return "null"
@@ -31,9 +31,9 @@ enum ToDoItemPriority: JSONable {
         }
         switch jsonString {
         case "important":
-            return .Important
+            return .important
         case "unimportant":
-            return .Unimportant
+            return .unimportant
         default:
             return nil
         }

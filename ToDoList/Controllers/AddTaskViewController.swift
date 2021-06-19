@@ -12,7 +12,7 @@ class AddTaskViewController: UIViewController {
     var toDoItem: ToDoItem? = nil
     
     let fileCache = FileCache.instance
-
+    
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -23,47 +23,63 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureTitle()
-        
-        
+        configureTextField()
+        configureOptions()
+        configureDeleteButton()
+    }
+    
+    var priority: ToDoItemPriority = .normal
+    
+    func priorityOptions() {
+        switch prioritySegmentedControl.selectedSegmentIndex {
+        case 0:
+            priority = .unimportant
+        case 1:
+            priority = .normal
+        case 2:
+            priority = .important
+        default:
+            priority = .normal
+        }
+    }
+    
+    func configureTitle() {
+        title = "Дело"
+    }
+    
+    func configureTextField() {
         textField.layer.cornerRadius = 16.0
+    }
+    
+    func configureOptions() {
         optionsStackView.layer.cornerRadius = 16.0
-        deleteButton.layer.cornerRadius = 16.0
         datePicker.isHidden = true
         prioritySwitch.isOn = false
         separator2.isHidden = true
     }
     
-    var priority: ToDoItemPriority = .Default
-    
-    func priorityOptions() {
-        switch prioritySegmentedControl.selectedSegmentIndex {
-                case 0:
-                    priority = .Unimportant
-                case 1:
-                    priority = .Default
-                case 2:
-                    priority = .Important
-                default:
-                    priority = .Default
-                }
+    func configureDeleteButton() {
+        deleteButton.layer.cornerRadius = 16.0
     }
     
     func saveOptions() {
         priorityOptions()
         let item = ToDoItem(text: textField.text ?? "Без заголовка", priority: priority, deadline: datePicker.date)
         fileCache.addToDo(item)
-        
+    }
+    
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         saveOptions()
-        _ = navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
-        _ = navigationController?.popViewController(animated: true)
+    @IBAction func deleteButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func switchDidChange(_ sender: UISwitch) {
@@ -73,11 +89,6 @@ class AddTaskViewController: UIViewController {
         } else {
             datePicker.isHidden = true
             separator2.isHidden = true
-
         }
-    }
-    
-    func configureTitle() {
-        title = "Дело"
     }
 }

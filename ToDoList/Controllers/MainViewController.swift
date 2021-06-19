@@ -58,6 +58,9 @@ class MainViewController: UIViewController {
         addButton.layer.shadowRadius = 20
     }
     
+    @IBAction func showButtonDidTap(_ sender: UIButton) {
+        showButton.setTitle("Скрыть", for: .normal)
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {

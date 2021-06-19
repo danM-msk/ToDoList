@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ToDoItem {
+struct ToDoItem: Equatable {
     var id: String
     let text: String
     let priority: ToDoItemPriority
@@ -25,7 +25,7 @@ struct ToDoItem {
         if let priority = priority {
             self.priority = priority
         } else {
-            self.priority = .Default
+            self.priority = .normal
         }
         
         self.deadline = deadline
@@ -38,12 +38,4 @@ struct ToDoItem {
     fileprivate static func generateID() -> String {
         return UUID().uuidString
     }
-}
-
-extension ToDoItem: Equatable {
-    
-    static func ==(first: ToDoItem, second: ToDoItem) -> Bool {
-        return first.id == second.id && first.text == second.text && first.priority == second.priority && first.deadline == second.deadline
-    }
-    
 }

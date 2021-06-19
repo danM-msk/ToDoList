@@ -22,7 +22,7 @@ class ToDoListTests: XCTestCase {
         let now = Date()
         let weekAfter = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: now)
         
-        let todoItem = ToDoItem(text: "content here", priority: .Unimportant, deadline: weekAfter)
+        let todoItem = ToDoItem(text: "content here", priority: .unimportant, deadline: weekAfter)
         let jsonToDoItem = todoItem.json
         let secondTodoItem = ToDoItem.parse(json: jsonToDoItem)
         XCTAssertNotNil(secondTodoItem)
