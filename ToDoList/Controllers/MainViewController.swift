@@ -9,19 +9,12 @@ import UIKit
 
 class MainViewController: UIViewController {
 
-
-    @IBOutlet weak var doneLabel: UILabel!
-    @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureTitle()
-        configureDoneLabel()
-        configureShowButton()
         configureTableView()
         configureAddButton()
     }
@@ -31,24 +24,18 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.layoutMargins.left = 32
     }
     
-    func configureDoneLabel() {
-        doneLabel.textAlignment = .left
-        doneLabel.text = "Выполнено — ЧИСЛО СЮДЫ"
-        doneLabel.font = .systemFont(ofSize: 15)
-        doneLabel.alpha = 0.3
-    }
-    
-    func configureShowButton() {
-        showButton.setTitle("Показать", for: .normal)
-        showButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.right
-        showButton.setTitleColor(UIColor(named: "showButtonColor"), for: .normal)
-    }
-    
     func configureTableView() {
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 16
+        
+        // TODO: add height constraint and dynamic row height
+        tableView.estimatedRowHeight = 68.0
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        let tableHeaderView = TableViewHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        tableView.tableHeaderView = tableHeaderView
     }
     
     func configureAddButton() {
@@ -57,23 +44,22 @@ class MainViewController: UIViewController {
         addButton.layer.shadowOffset = .zero
         addButton.layer.shadowRadius = 20
     }
-    
-    @IBAction func showButtonDidTap(_ sender: UIButton) {
-        showButton.setTitle("Скрыть", for: .normal)
-    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return FileCache.instance.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! TaskCell
-        cell.dateLabel?.text = "Date"
-        cell.taskLabel?.text = "task"
+        let todo = FileCache.instance.todos[indexPath.row]
+        cell.dateLabel?.text = todo.deadline?.description ?? "date"
+        cell.taskLabel?.text = todo.text
         return cell
     }
     
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        <#code#>
+//    }
 }

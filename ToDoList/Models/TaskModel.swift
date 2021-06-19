@@ -10,5 +10,4 @@ import Foundation
 class TaskModel {
     static let instance = TaskModel()
     var tasks = [ToDoItem]()
-    
 }

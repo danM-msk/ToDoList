@@ -10,4 +10,5 @@ import Foundation
 struct Constants {
     static let cellIdentifier = "ReusableCell"
     static let cellNibName = "TaskCell"
+    static let kTableHeaderView = "TableViewHeader"
 }
