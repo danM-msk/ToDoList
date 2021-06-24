@@ -8,14 +8,14 @@
 import Foundation
 
 extension ToDoItem: JSONable {
-    var json: Any {
+    var json: Any? {
         get {
             do {
                 var itemDictionary: [String: Any] = [
                     "id": id,
-                    "text": text,
+                    "text": text
                 ]
-                if priority != .Default {
+                if priority != .normal {
                     itemDictionary["priority"] = priority.json
                 }
                 if let deadline = deadline {
@@ -25,7 +25,7 @@ extension ToDoItem: JSONable {
                 return String(data: jsonData, encoding: .utf8) ?? print("json encoding failed")
             } catch let error {
                 print(error)
-                return error
+                return nil
             }
         }
     }
@@ -46,6 +46,7 @@ extension ToDoItem: JSONable {
             guard let text = dict["text"] else { return nil }
             var priority: ToDoItemPriority?
             var deadline: Date?
+            var isDone: Bool
             
             if let priorityString = dict["priority"] {
                 priority = ToDoItemPriority.parse(json: priorityString)
@@ -55,7 +56,7 @@ extension ToDoItem: JSONable {
                     deadline = Date(timeIntervalSince1970: utc)
                 }
             }
-            return ToDoItem.init(id: id, text: text, priority: priority, deadline: deadline)
+            return ToDoItem.init(id: id, text: text, priority: priority, deadline: deadline, isDone: false)
             
         } catch {
             print(error.localizedDescription)
