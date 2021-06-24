@@ -11,8 +11,6 @@ class AddTaskViewController: UIViewController {
     
     var toDoItem: ToDoItem? = nil
     
-    let fileCache = FileCache.instance
-    
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -50,6 +48,17 @@ class AddTaskViewController: UIViewController {
     
     func configureTextField() {
         textField.layer.cornerRadius = 16.0
+        textField.delegate = self
+    }
+    
+    private func configureTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddTaskViewController.handleTap))
+        view.addGestureRecognizer(tapGesture)
+        view.endEditing(true)
+    }
+    
+    @objc func handleTap() {
+        
     }
     
     func configureOptions() {
@@ -63,22 +72,23 @@ class AddTaskViewController: UIViewController {
         deleteButton.layer.cornerRadius = 16.0
     }
     
-    func saveOptions() {
+    func saveTask() {
         priorityOptions()
-        let item = ToDoItem(text: textField.text ?? "Без заголовка", priority: priority, deadline: datePicker.date)
-        fileCache.addToDo(item)
+        let item = ToDoItem(text: textField.text ?? "Без заголовка", priority: priority, deadline: datePicker.date, isDone: false)
+        FileCache.instance.addToDo(item)
     }
     
-    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+    @IBAction func cancelButtonDidTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        saveOptions()
+    @IBAction func saveButtonDidTap(_ sender: Any) {
+        saveTask()
         self.dismiss(animated: true, completion: nil)
+        print(FileCache.instance.todos.description)
     }
     
-    @IBAction func deleteButtonDidTap(_ sender: UIButton) {
+    @IBAction func deleteButtonDidTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -90,5 +100,12 @@ class AddTaskViewController: UIViewController {
             datePicker.isHidden = true
             separator2.isHidden = true
         }
+    }
+}
+
+extension AddTaskViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

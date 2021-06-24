@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="s6s-ze-K8W" customClass="AddTaskViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GCf-eF-T9Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxh-cd-Zio">
@@ -206,7 +206,7 @@
                         <outlet property="prioritySegmentedControl" destination="fni-0g-5rL" id="aIf-ul-Kcm"/>
                         <outlet property="prioritySwitch" destination="BRo-Wz-iHr" id="B5D-S2-SfH"/>
                         <outlet property="separator2" destination="i89-Rv-bCP" id="i7P-qM-axa"/>
-                        <outlet property="textField" destination="eJO-P1-VmP" id="AgS-zs-spS"/>
+                        <outlet property="textField" destination="eJO-P1-VmP" id="pLU-m5-IQ5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHJ-n7-cKM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

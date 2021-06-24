@@ -41,7 +41,7 @@ class TableViewHeader: UIView {
     
     func configureDoneLabel() {
         doneLabel.textAlignment = .left
-        doneLabel.text = "Выполнено — ЧИСЛО СЮДЫ"
+        doneLabel.text = "Всего — \(FileCache.instance.todos.count)"
         doneLabel.font = .systemFont(ofSize: 15)
         doneLabel.alpha = 0.3
     }
@@ -53,7 +53,6 @@ class TableViewHeader: UIView {
     }
     
     @IBAction func showButtonDidTap(_ sender: UIButton) {
-        showButton.setTitle("Скрыть", for: .normal)
+        FileCache.instance.activeTodos
     }
-    
 }

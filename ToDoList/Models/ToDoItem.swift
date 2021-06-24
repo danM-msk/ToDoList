@@ -12,8 +12,9 @@ struct ToDoItem: Equatable {
     let text: String
     let priority: ToDoItemPriority
     let deadline: Date?
+    var isDone = false
     
-    init(id: String?, text: String, priority: ToDoItemPriority?, deadline: Date?) {
+    init(id: String?, text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
         if let extId = id {
             self.id = extId
         } else {
@@ -31,8 +32,8 @@ struct ToDoItem: Equatable {
         self.deadline = deadline
     }
     
-    init (text: String, priority: ToDoItemPriority?, deadline: Date?) {
-        self.init(id: nil, text: text, priority: priority, deadline: deadline)
+    init (text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
+        self.init(id: nil, text: text, priority: priority, deadline: deadline, isDone: false)
     }
     
     fileprivate static func generateID() -> String {
