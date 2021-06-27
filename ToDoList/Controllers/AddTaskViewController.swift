@@ -11,22 +11,29 @@ class AddTaskViewController: UIViewController {
     
     var toDoItem: ToDoItem? = nil
     
+    
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var optionsStackView: UIStackView!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var optionsStack: UIStackView!
     @IBOutlet weak var prioritySwitch: UISwitch!
     @IBOutlet weak var separator2: UIView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureTitle()
         configureTextField()
         configureOptions()
         configureDeleteButton()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    var textOutput: String?
     var priority: ToDoItemPriority = .normal
     
     func priorityOptions() {
@@ -47,22 +54,17 @@ class AddTaskViewController: UIViewController {
     }
     
     func configureTextField() {
-        textField.layer.cornerRadius = 16.0
+        textField.layer.cornerRadius = 16
         textField.delegate = self
     }
     
-    private func configureTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddTaskViewController.handleTap))
-        view.addGestureRecognizer(tapGesture)
-        view.endEditing(true)
-    }
-    
-    @objc func handleTap() {
-        
+    func goBack() {
+        let vc = AddTaskViewController()
+        vc.dismiss(animated: true, completion: nil)
     }
     
     func configureOptions() {
-        optionsStackView.layer.cornerRadius = 16.0
+        optionsStack.layer.cornerRadius = 16.0
         datePicker.isHidden = true
         prioritySwitch.isOn = false
         separator2.isHidden = true
@@ -79,17 +81,17 @@ class AddTaskViewController: UIViewController {
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        goBack()
     }
     
     @IBAction func saveButtonDidTap(_ sender: Any) {
         saveTask()
-        self.dismiss(animated: true, completion: nil)
         print(FileCache.instance.todos.description)
+        goBack()
     }
     
     @IBAction func deleteButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        goBack()
     }
     
     @IBAction func switchDidChange(_ sender: UISwitch) {

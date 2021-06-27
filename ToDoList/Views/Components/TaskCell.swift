@@ -11,4 +11,11 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var radioButton: UIButton!
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBAction func radioButtonDidTap(_ sender: Any) {
+        
+        radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
+//        TODO: configure radioButton
+    }
+    
 }

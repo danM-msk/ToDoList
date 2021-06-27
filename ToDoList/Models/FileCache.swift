@@ -10,12 +10,9 @@ import Foundation
 class FileCache {
     
     private var cache = [
-        ToDoItem(text:
-        """
-            Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
-        """, priority: .important, deadline: Date().addWeek(1), isDone: false),
-        ToDoItem(text: "asqwqewqwe", priority: .important, deadline: nil, isDone: false),
-        ToDoItem(text: "3 task qewqwe", priority: .normal, deadline: nil, isDone: true)
+        ToDoItem(text: "Test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test testtest test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ", priority: .important, deadline: Date().addWeek(1), isDone: false),
+        ToDoItem(text: "test2", priority: .important, deadline: nil, isDone: false),
+        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true)
     ]
     
     public static let instance = FileCache()
@@ -38,10 +35,10 @@ class FileCache {
                 item.id == uuid
             })
         }
-//        set(new) {
-//            self.cache[i].isDone.toggle()
-//            }
-        }
+        //        set(new) {
+        //            self.cache[i].isDone.toggle()
+        //            }
+    }
     
     public func addToDo(_ item: ToDoItem) {
         self.cache.append(item)
@@ -56,7 +53,7 @@ class FileCache {
     public func saveToLocalDirectory() {
         
         let path = getDocumentsDirectory().appendingPathComponent("/filecache")
-
+        
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: cache, requiringSecureCoding: false)
             try data.write(to: path)
@@ -71,10 +68,10 @@ class FileCache {
         
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
-
+        
         do {
             let items = try fm.contentsOfDirectory(atPath: path)
-
+            
             
             
             for item in items {
@@ -82,12 +79,8 @@ class FileCache {
                 readData = item.data(using: .utf8)
             }
         } catch {
-            // failed to read directory – bad permissions, perhaps?
         }
         
-//        NSKeyedUnarchiver.init(forReadingFrom: <#T##Data#>)
-//
-//        NSKeyedUnarchiver.unarchivedObject(ofClass: cache.self, from: <#T##Data#>)
         do {
             if let data = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(readData!) as? ToDoItem {
                 cache.append(data)

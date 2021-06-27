@@ -46,7 +46,6 @@ extension ToDoItem: JSONable {
             guard let text = dict["text"] else { return nil }
             var priority: ToDoItemPriority?
             var deadline: Date?
-            var isDone: Bool
             
             if let priorityString = dict["priority"] {
                 priority = ToDoItemPriority.parse(json: priorityString)

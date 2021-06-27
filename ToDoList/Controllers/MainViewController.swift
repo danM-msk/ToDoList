@@ -14,11 +14,17 @@ class MainViewController: UIViewController {
     
     let refreshControl = UIRefreshControl()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureTitle()
         configureTableView()
         configureAddButton()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.reloadData()
+        
     }
     
     func configureTitle() {
@@ -31,8 +37,6 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 16
-        
-        // TODO: add height constraint and dynamic row height
         tableView.estimatedRowHeight = 68.0
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -62,7 +66,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,6 +80,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.taskLabel?.text = todo.text
         if todo.isDone == true {
             cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
+        } else {
+            cell.radioButton.setImage(UIImage(named: "radioButtonDefault"), for: .normal)
         }
         return cell
     }
@@ -86,7 +92,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let doneAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            let todoID = FileCache.instance.todos[indexPath.row].id
+//            let todoID = FileCache.instance.todos[indexPath.row].id
 //            FileCache.instance[todoID]?.isDone.toggle()
             completionHandler(true)
         }
@@ -109,7 +115,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         deleteAction.backgroundColor = .systemRed
         
         let infoAction = UIContextualAction(style: .normal, title: nil) { (_, _, completionHandler) in
-            print("Segue To TaskInfoVC")
+            let viewControllerToPresent = AddTaskViewController()
+            self.present(viewControllerToPresent, animated: true, completion: nil)
             completionHandler(true)
         }
         infoAction.image = UIImage(systemName: "info.circle.fill")
@@ -119,4 +126,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
     
+    private func tableView(tableView: UITableView,
+                           heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }

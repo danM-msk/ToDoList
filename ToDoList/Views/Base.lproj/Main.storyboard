@@ -115,7 +115,7 @@
                                                     <color key="titleColor" systemColor="systemRedColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="deleteButtonDidTap:" destination="s6s-ze-K8W" eventType="touchUpInside" id="wjl-G8-pqW"/>
+                                                    <action selector="deleteButtonDidTap:" destination="s6s-ze-K8W" eventType="touchUpInside" id="cBt-n2-rNt"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Что надо сделать?" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eJO-P1-VmP" userLabel="Text Field">
@@ -201,12 +201,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="nt2-U3-KK0" id="gzm-LV-wWK"/>
-                        <outlet property="deleteButton" destination="Ttw-5l-IsF" id="aKg-cN-OyU"/>
-                        <outlet property="optionsStackView" destination="iqJ-FP-M3i" id="Jn6-CU-OPP"/>
+                        <outlet property="deleteButton" destination="Ttw-5l-IsF" id="GRS-Q4-fgA"/>
+                        <outlet property="optionsStack" destination="iqJ-FP-M3i" id="w4P-Ip-2e3"/>
                         <outlet property="prioritySegmentedControl" destination="fni-0g-5rL" id="aIf-ul-Kcm"/>
                         <outlet property="prioritySwitch" destination="BRo-Wz-iHr" id="B5D-S2-SfH"/>
                         <outlet property="separator2" destination="i89-Rv-bCP" id="i7P-qM-axa"/>
-                        <outlet property="textField" destination="eJO-P1-VmP" id="pLU-m5-IQ5"/>
+                        <outlet property="textField" destination="eJO-P1-VmP" id="oFQ-aC-Shn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHJ-n7-cKM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -222,7 +222,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qPp-T5-gd1">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="16" y="140" width="382" height="722"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
@@ -241,12 +241,12 @@
                         <viewLayoutGuide key="safeArea" id="2hu-oW-n7x"/>
                         <color key="backgroundColor" name="backgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="qPp-T5-gd1" secondAttribute="bottom" id="4W3-zj-zUn"/>
-                            <constraint firstItem="qPp-T5-gd1" firstAttribute="leading" secondItem="2hu-oW-n7x" secondAttribute="leading" id="C3t-uo-ZPq"/>
-                            <constraint firstItem="qPp-T5-gd1" firstAttribute="top" secondItem="s8V-Ps-QVk" secondAttribute="top" id="Mwh-oJ-GIi"/>
+                            <constraint firstItem="2hu-oW-n7x" firstAttribute="bottom" secondItem="qPp-T5-gd1" secondAttribute="bottom" id="4W3-zj-zUn"/>
+                            <constraint firstItem="qPp-T5-gd1" firstAttribute="leading" secondItem="2hu-oW-n7x" secondAttribute="leading" constant="16" id="C3t-uo-ZPq"/>
                             <constraint firstItem="wlC-rL-QxR" firstAttribute="centerX" secondItem="s8V-Ps-QVk" secondAttribute="centerX" id="WcK-Uz-2MS"/>
                             <constraint firstItem="wlC-rL-QxR" firstAttribute="bottom" secondItem="2hu-oW-n7x" secondAttribute="bottom" constant="-54" id="Y4w-qB-ayb"/>
-                            <constraint firstItem="2hu-oW-n7x" firstAttribute="trailing" secondItem="qPp-T5-gd1" secondAttribute="trailing" id="z4e-fQ-SXK"/>
+                            <constraint firstItem="qPp-T5-gd1" firstAttribute="top" secondItem="2hu-oW-n7x" secondAttribute="top" id="vB2-TA-oNU"/>
+                            <constraint firstItem="2hu-oW-n7x" firstAttribute="trailing" secondItem="qPp-T5-gd1" secondAttribute="trailing" constant="16" id="z4e-fQ-SXK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6yV-7x-n7q"/>
@@ -306,7 +306,7 @@
             <color red="0.96899998188018799" green="0.9649999737739563" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="backgroundColor">
-            <color red="0.96899998188018799" green="0.9649999737739563" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
