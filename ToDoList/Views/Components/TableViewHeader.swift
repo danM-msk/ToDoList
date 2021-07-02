@@ -54,6 +54,6 @@ class TableViewHeader: UIView {
     
     @IBAction func showButtonDidTap(_ sender: UIButton) {
         print("Tapped")
-        FileCache.instance.activeTodos
+//        FileCache.instance.activeTodos
     }
 }

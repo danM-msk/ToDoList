@@ -13,6 +13,8 @@ struct ToDoItem: Equatable {
     let priority: ToDoItemPriority
     let deadline: Date?
     var isDone = false
+    var updatedAt: Int?
+    var isDirty = false
     
     init(id: String?, text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
         if let extId = id {
@@ -30,6 +32,7 @@ struct ToDoItem: Equatable {
         }
         
         self.deadline = deadline
+
     }
     
     init (text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
