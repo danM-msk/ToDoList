@@ -11,13 +11,14 @@ class AddTaskViewController: UIViewController {
     
     let scrollView = UIScrollView()
     var textField = TextFieldExtension()
+    var tableView = UITableView()
+    let deleteButton = UIButton()
     
     var prioritySegmentedControl = UISegmentedControl()
     var datePicker = UIDatePicker()
     var optionsStack = UIStackView()
     var prioritySwitch = UISwitch()
     var separator2 = UIView()
-    var deleteButton = UIButton()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +26,9 @@ class AddTaskViewController: UIViewController {
         configureNavigationBar()
         configureScrollView()
         configureTextField()
+        configureTableView()
+        
+        
         configureOptions()
         configureDeleteButton()
     }
@@ -105,15 +109,60 @@ class AddTaskViewController: UIViewController {
         }
     }
     
+    func configureTableView() {
+        scrollView.addSubview(tableView)
+        setTableViewDelegates()
+        setTableViewConstraints()
+        tableView.layer.cornerRadius = 16
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 56.0
+        tableView.register(FirstCell.self, forCellReuseIdentifier: FirstCell.identifier)
+    }
+    
+    func setTableViewDelegates() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    func setTableViewConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: 16).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
+    }
+    
+    func configureDeleteButton() {
+        scrollView.addSubview(deleteButton)
+        setDeleteButtonConstraints()
+        deleteButton.backgroundColor = .white
+        deleteButton.setTitle("Удалить", for: .normal)
+        deleteButton.setTitleColor(.systemRed, for: .normal)
+        deleteButton.layer.cornerRadius = 16.0
+        deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
+    }
+    
+    func setDeleteButtonConstraints() {
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.heightAnchor
+        deleteButton.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 160).isActive = true
+        deleteButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
+        deleteButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
+    }
+    
+    @objc func deleteButtonDidTap () {
+        //TODO: delete ToDoItem from FileCache
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
     func configureOptions() {
         optionsStack.layer.cornerRadius = 16.0
         datePicker.isHidden = true
         prioritySwitch.isOn = false
         separator2.isHidden = true
-    }
-    
-    func configureDeleteButton() {
-        deleteButton.layer.cornerRadius = 16.0
     }
     
     override func viewDidLoad() {
@@ -152,4 +201,25 @@ extension AddTaskViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: FirstCell.identifier, for: indexPath) as! FirstCell
+        return cell
+//        if indexPath.row == 0 {
+//            let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FirstCell
+//            return cell
+//        } else if indexPath.row == 1 {
+//            let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SecondCell
+//            return cell
+//        }
+    }
+    
+    
 }

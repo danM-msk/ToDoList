@@ -38,8 +38,8 @@ class MainViewController: UIViewController {
         configureTableHeaderView()
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.layer.cornerRadius = 16
-        tableView.estimatedRowHeight = 68.0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 68.0
     }
     
     func setTableViewDelegates() {
