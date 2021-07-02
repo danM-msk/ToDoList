@@ -9,27 +9,46 @@ import UIKit
 
 class AddTaskViewController: UIViewController {
     
-    let scrollView = UIScrollView()
+    lazy var scrollView: UIScrollView = {
+        let mainView = UIScrollView()
+        mainView.insetsLayoutMarginsFromSafeArea = true
+        mainView.contentInsetAdjustmentBehavior = .always
+        mainView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        mainView.backgroundColor = .clear
+        return mainView
+    }()
+    
     var textField = TextFieldExtension()
-    var tableView = UITableView()
+    let optionsStackView = UIStackView()
+    let importanceView = UIView()
+    let importanceLabel = UILabel()
+    let importanceSegmentedControl = UISegmentedControl(items: ["↓", "нет", "!!"])
+    let separator1 = UIView()
+    let dateView = UIView()
+    
     let deleteButton = UIButton()
     
-    var prioritySegmentedControl = UISegmentedControl()
+    
     var datePicker = UIDatePicker()
-    var optionsStack = UIStackView()
     var prioritySwitch = UISwitch()
     var separator2 = UIView()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         configureView()
         configureNavigationBar()
-        configureScrollView()
+        view.addSubview(scrollView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         configureTextField()
-        configureTableView()
-        
-        
-        configureOptions()
+        configureOptionsStackView()
+        configureImportanceView()
+        configureImportanceSegmentedControl()
+        configureImportanceLabel()
+        configureSeparator1()
+        configureDateView()
         configureDeleteButton()
     }
     
@@ -62,15 +81,9 @@ class AddTaskViewController: UIViewController {
     }
     
     func saveTask() {
-        priorityOptions()
+//        priorityOptions()
         let item = ToDoItem(text: "Без заголовка", priority: priority, deadline: datePicker.date, isDone: false)
         FileCache.instance.addToDo(item)
-    }
-    
-    func configureScrollView() {
-        view.addSubview(scrollView)
-        scrollView.backgroundColor = UIColor(named: "backgroundColor")
-        scrollView.pin(to: view)
     }
     
     func configureTextField() {
@@ -88,8 +101,9 @@ class AddTaskViewController: UIViewController {
     func setTextFieldConstraints() {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 16).isActive = true
-        textField.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16).isActive = true
-        textField.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16).isActive = true
+        textField.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: view.frame.width - 32).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
     
     class TextFieldExtension: UITextField {
@@ -109,27 +123,87 @@ class AddTaskViewController: UIViewController {
         }
     }
     
-    func configureTableView() {
-        scrollView.addSubview(tableView)
-        setTableViewDelegates()
-        setTableViewConstraints()
-        tableView.layer.cornerRadius = 16
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 56.0
-        tableView.register(FirstCell.self, forCellReuseIdentifier: FirstCell.identifier)
+    func configureOptionsStackView() {
+        scrollView.addSubview(optionsStackView)
+        optionsStackView.backgroundColor = .white
+        optionsStackView.layer.cornerRadius = 16.0
+        optionsStackView.axis = .vertical
+        setOptionsStackViewConstraints()
+        
+    }
+        
+    func setOptionsStackViewConstraints() {
+        optionsStackView.translatesAutoresizingMaskIntoConstraints = false
+        optionsStackView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16).isActive = true
+        optionsStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        optionsStackView.widthAnchor.constraint(equalToConstant: view.frame.width - 32).isActive = true
     }
     
-    func setTableViewDelegates() {
-        tableView.delegate = self
-        tableView.dataSource = self
+    func configureImportanceView() {
+        optionsStackView.addArrangedSubview(importanceView)
+        importanceView.backgroundColor = .clear
+        setImportanceViewConstraints()
+    }
+
+    func setImportanceViewConstraints() {
+        importanceView.translatesAutoresizingMaskIntoConstraints = false
+        importanceView.topAnchor.constraint(equalTo: optionsStackView.topAnchor).isActive = true
+        importanceView.centerYAnchor.constraint(equalTo: optionsStackView.centerYAnchor).isActive = true
+        importanceView.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        importanceView.widthAnchor.constraint(equalToConstant: optionsStackView.frame.width).isActive = true
+    }
+
+    
+    func configureImportanceLabel() {
+        importanceView.addSubview(importanceLabel)
+        importanceLabel.text = "Важность"
+        importanceLabel.textAlignment = .left
+        importanceLabel.font = UIFont.systemFont(ofSize: 17)
+        setImportanceLabelConstraints()
     }
     
-    func setTableViewConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: 16).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
+    func setImportanceLabelConstraints() {
+        importanceLabel.translatesAutoresizingMaskIntoConstraints = false
+        importanceLabel.centerYAnchor.constraint(equalTo: importanceView.centerYAnchor).isActive = true
+        importanceLabel.leftAnchor.constraint(equalTo: importanceView.leftAnchor, constant: 16).isActive = true
+        importanceLabel.rightAnchor.constraint(equalTo: importanceSegmentedControl.leftAnchor).isActive = true
     }
+    
+    func configureImportanceSegmentedControl() {
+        importanceView.addSubview(importanceSegmentedControl)
+        setImportanceSegmentedControlConstraints()
+    }
+    
+    func setImportanceSegmentedControlConstraints() {
+        importanceSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        importanceSegmentedControl.centerYAnchor.constraint(equalTo: importanceView.centerYAnchor).isActive = true
+        importanceSegmentedControl.trailingAnchor.constraint(equalTo: importanceView.trailingAnchor, constant: -12).isActive = true
+//        importanceSegmentedControl.leadingAnchor.constraint(equalTo: importanceLabel.trailingAnchor).isActive = true
+    }
+    
+    func configureSeparator1() {
+        importanceView.addSubview(separator1)
+        separator1.translatesAutoresizingMaskIntoConstraints = false
+        separator1.leadingAnchor.constraint(equalTo: importanceView.leadingAnchor, constant: 16).isActive = true
+        separator1.trailingAnchor.constraint(equalTo: importanceView.trailingAnchor).isActive = true
+        separator1.topAnchor.constraint(equalTo: importanceLabel.bottomAnchor, constant: 1).isActive = true
+        separator1.bottomAnchor.constraint(equalTo: importanceView.bottomAnchor).isActive = true
+    }
+    
+    func configureDateView() {
+        optionsStackView.addArrangedSubview(dateView)
+        dateView.backgroundColor = .clear
+        setDateViewConstraints()
+    }
+    
+    func setDateViewConstraints() {
+        dateView.translatesAutoresizingMaskIntoConstraints = false
+        dateView.topAnchor.constraint(equalTo: optionsStackView.topAnchor).isActive = true
+        dateView.centerYAnchor.constraint(equalTo: optionsStackView.centerYAnchor).isActive = true
+        dateView.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        dateView.widthAnchor.constraint(equalToConstant: optionsStackView.frame.width).isActive = true
+    }
+    
     
     func configureDeleteButton() {
         scrollView.addSubview(deleteButton)
@@ -143,10 +217,10 @@ class AddTaskViewController: UIViewController {
     
     func setDeleteButtonConstraints() {
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.heightAnchor
-        deleteButton.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 160).isActive = true
-        deleteButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16).isActive = true
-        deleteButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16).isActive = true
+        deleteButton.topAnchor.constraint(equalTo: optionsStackView.bottomAnchor, constant: 16).isActive = true
+        deleteButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        deleteButton.widthAnchor.constraint(equalToConstant: view.frame.width - 32).isActive = true
+        deleteButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
     }
     
     @objc func deleteButtonDidTap () {
@@ -158,32 +232,28 @@ class AddTaskViewController: UIViewController {
     
     
     
-    func configureOptions() {
-        optionsStack.layer.cornerRadius = 16.0
-        datePicker.isHidden = true
-        prioritySwitch.isOn = false
-        separator2.isHidden = true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+//    func configureOptions() {
+//        optionsStack.layer.cornerRadius = 16.0
+//        datePicker.isHidden = true
+//        prioritySwitch.isOn = false
+//        separator2.isHidden = true
+//    }
     
     var textOutput: String?
     var priority: ToDoItemPriority = .normal
     
-    func priorityOptions() {
-        switch prioritySegmentedControl.selectedSegmentIndex {
-        case 0:
-            priority = .unimportant
-        case 1:
-            priority = .normal
-        case 2:
-            priority = .important
-        default:
-            priority = .normal
-        }
-    }
+//    func priorityOptions() {
+//        switch prioritySegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            priority = .unimportant
+//        case 1:
+//            priority = .normal
+//        case 2:
+//            priority = .important
+//        default:
+//            priority = .normal
+//        }
+//    }
     
     @IBAction func switchDidChange(_ sender: UISwitch) {
         if sender.isOn {
@@ -201,25 +271,4 @@ extension AddTaskViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-}
-
-extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: FirstCell.identifier, for: indexPath) as! FirstCell
-        return cell
-//        if indexPath.row == 0 {
-//            let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FirstCell
-//            return cell
-//        } else if indexPath.row == 1 {
-//            let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SecondCell
-//            return cell
-//        }
-    }
-    
-    
 }

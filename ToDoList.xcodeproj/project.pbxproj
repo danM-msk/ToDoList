@@ -15,14 +15,11 @@
 		5C74B3812674D21600DACE53 /* JSONable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B3802674D21600DACE53 /* JSONable.swift */; };
 		5C74B3832674DA4800DACE53 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B3822674DA4800DACE53 /* FileCache.swift */; };
 		5C74B38926765B8200DACE53 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C74B38826765B8200DACE53 /* AddTaskViewController.swift */; };
-		5CB0E642267DDF2900AB166E /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB0E641267DDF2900AB166E /* TableViewHeader.swift */; };
-		5CB0E644267DDF6E00AB166E /* TableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB0E643267DDF6E00AB166E /* TableViewHeader.xib */; };
 		5CB29F2B268DE65F008B460A /* Tombstone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F2A268DE65F008B460A /* Tombstone.swift */; };
 		5CB29F2D268DE773008B460A /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F2C268DE773008B460A /* NetworkingService.swift */; };
 		5CB29F2F268DE818008B460A /* DefaultNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F2E268DE818008B460A /* DefaultNetworkingService.swift */; };
 		5CB29F53268E6A88008B460A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F52268E6A88008B460A /* UIView+Extension.swift */; };
-		5CB29F58268E9B64008B460A /* FirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F56268E9B64008B460A /* FirstCell.swift */; };
-		5CB29F59268E9B64008B460A /* FirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB29F57268E9B64008B460A /* FirstCell.xib */; };
+		5CB29F5B268F5D33008B460A /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB29F5A268F5D33008B460A /* AddItemCell.swift */; };
 		5CB53B89267B9A5900513766 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB53B88267B9A5900513766 /* Constants.swift */; };
 		5CB53B8F267CAD9900513766 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB53B8E267CAD9900513766 /* MainViewController.swift */; };
 		5CB53B92267CB20400513766 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB53B90267CB20400513766 /* TaskCell.swift */; };
@@ -63,14 +60,11 @@
 		5C74B3802674D21600DACE53 /* JSONable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONable.swift; sourceTree = "<group>"; };
 		5C74B3822674DA4800DACE53 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		5C74B38826765B8200DACE53 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
-		5CB0E641267DDF2900AB166E /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
-		5CB0E643267DDF6E00AB166E /* TableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewHeader.xib; sourceTree = "<group>"; };
 		5CB29F2A268DE65F008B460A /* Tombstone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tombstone.swift; sourceTree = "<group>"; };
 		5CB29F2C268DE773008B460A /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		5CB29F2E268DE818008B460A /* DefaultNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkingService.swift; sourceTree = "<group>"; };
 		5CB29F52268E6A88008B460A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		5CB29F56268E9B64008B460A /* FirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCell.swift; sourceTree = "<group>"; };
-		5CB29F57268E9B64008B460A /* FirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstCell.xib; sourceTree = "<group>"; };
+		5CB29F5A268F5D33008B460A /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
 		5CB53B88267B9A5900513766 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5CB53B8E267CAD9900513766 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5CB53B90267CB20400513766 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
@@ -174,30 +168,11 @@
 		5CB0E640267DDE2E00AB166E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5CB29F54268E9AF9008B460A /* ComponentsMainVC */,
-				5CB29F55268E9B21008B460A /* ComponentsAddTaskVC */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		5CB29F54268E9AF9008B460A /* ComponentsMainVC */ = {
-			isa = PBXGroup;
-			children = (
-				5CB0E641267DDF2900AB166E /* TableViewHeader.swift */,
-				5CB0E643267DDF6E00AB166E /* TableViewHeader.xib */,
 				5CB53B90267CB20400513766 /* TaskCell.swift */,
 				5CB53B91267CB20400513766 /* TaskCell.xib */,
+				5CB29F5A268F5D33008B460A /* AddItemCell.swift */,
 			);
-			path = ComponentsMainVC;
-			sourceTree = "<group>";
-		};
-		5CB29F55268E9B21008B460A /* ComponentsAddTaskVC */ = {
-			isa = PBXGroup;
-			children = (
-				5CB29F56268E9B64008B460A /* FirstCell.swift */,
-				5CB29F57268E9B64008B460A /* FirstCell.xib */,
-			);
-			path = ComponentsAddTaskVC;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		5CBAC50D266A2D1000824112 = {
@@ -387,11 +362,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CB0E644267DDF6E00AB166E /* TableViewHeader.xib in Resources */,
 				5CBAC526266A2D1100824112 /* LaunchScreen.storyboard in Resources */,
 				5CB53B93267CB20400513766 /* TaskCell.xib in Resources */,
 				5CC4CDD9266F8A020066DE74 /* Localizable.strings in Resources */,
-				5CB29F59268E9B64008B460A /* FirstCell.xib in Resources */,
 				5CBAC523266A2D1100824112 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,14 +484,13 @@
 				5CBAC51A266A2D1000824112 /* AppDelegate.swift in Sources */,
 				5C74B3832674DA4800DACE53 /* FileCache.swift in Sources */,
 				5CB29F53268E6A88008B460A /* UIView+Extension.swift in Sources */,
+				5CB29F5B268F5D33008B460A /* AddItemCell.swift in Sources */,
 				5CB29F2F268DE818008B460A /* DefaultNetworkingService.swift in Sources */,
 				5C74B3812674D21600DACE53 /* JSONable.swift in Sources */,
 				5C74B37F2674BB7200DACE53 /* Date+Intervals.swift in Sources */,
 				5CC4CDDE26700C4C0066DE74 /* ToDoItem.swift in Sources */,
 				5CB53B92267CB20400513766 /* TaskCell.swift in Sources */,
 				5CBAC51C266A2D1000824112 /* SceneDelegate.swift in Sources */,
-				5CB29F58268E9B64008B460A /* FirstCell.swift in Sources */,
-				5CB0E642267DDF2900AB166E /* TableViewHeader.swift in Sources */,
 				5C74B38926765B8200DACE53 /* AddTaskViewController.swift in Sources */,
 				5CB53B89267B9A5900513766 /* Constants.swift in Sources */,
 			);
