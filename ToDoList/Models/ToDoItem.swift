@@ -10,13 +10,13 @@ import Foundation
 struct ToDoItem: Equatable {
     var id: String
     let text: String
-    let priority: ToDoItemPriority
+    let importance: ToDoItemImportance
     let deadline: Date?
     var isDone = false
     var updatedAt: Int?
     var isDirty = false
     
-    init(id: String?, text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
+    init(id: String?, text: String, priority: ToDoItemImportance?, deadline: Date?, isDone: Bool) {
         if let extId = id {
             self.id = extId
         } else {
@@ -26,16 +26,16 @@ struct ToDoItem: Equatable {
         self.text = text
         
         if let priority = priority {
-            self.priority = priority
+            self.importance = priority
         } else {
-            self.priority = .normal
+            self.importance = .normal
         }
         
         self.deadline = deadline
 
     }
     
-    init (text: String, priority: ToDoItemPriority?, deadline: Date?, isDone: Bool) {
+    init (text: String, priority: ToDoItemImportance?, deadline: Date?, isDone: Bool) {
         self.init(id: nil, text: text, priority: priority, deadline: deadline, isDone: false)
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ToDoItemPriority: JSONable, Equatable {
+enum ToDoItemImportance: JSONable, Equatable {
     case normal
     case unimportant
     case important
@@ -25,7 +25,7 @@ enum ToDoItemPriority: JSONable, Equatable {
         }
     }
     
-    static func parse(json: Any) -> ToDoItemPriority? {
+    static func parse(json: Any) -> ToDoItemImportance? {
         guard let jsonString = json as? String else {
             return nil
         }

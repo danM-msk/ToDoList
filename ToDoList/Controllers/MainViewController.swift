@@ -9,19 +9,20 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    public static let instance = MainViewController()
+    
     var tableView = UITableView()
     let addButton = UIButton()
     let titleLabel = UILabel()
     let doneLabel = UILabel()
     let showButton = UIButton()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         configureView()
         configureTitleLabel()
         configureDoneLabel()
         configureShowButton()
-//        configureNavigationBar()
         configureTableView()
         configureAddButton()
     }
@@ -31,52 +32,37 @@ class MainViewController: UIViewController {
         view.backgroundColor = UIColor(named: "backgroundColor")
     }
     
-//    func configureNavigationBar() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.layoutMargins.left = 32
-//        title = "Мои дела"
-//    }
-    
     func configureTitleLabel() {
+        view.addSubview(titleLabel)
         titleLabel.text = "Мои дела"
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.boldSystemFont(ofSize: 34)
-        view.addSubview(titleLabel)
-        setTitleLabelConstraints()
-    }
-    
-    func setTitleLabelConstraints() {
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 88).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
     }
     
     func configureDoneLabel() {
+        view.addSubview(doneLabel)
         doneLabel.text = "Выполнено: число"
         doneLabel.textAlignment = .left
         doneLabel.font = UIFont.systemFont(ofSize: 15)
         doneLabel.alpha = 0.3
-        view.addSubview(doneLabel)
-        setDoneLabelConstraints()
-    }
-    
-    func setDoneLabelConstraints() {
+        
         doneLabel.translatesAutoresizingMaskIntoConstraints = false
         doneLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 18).isActive = true
         doneLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
     }
     
     func configureShowButton() {
+        view.addSubview(showButton)
         showButton.setTitle("Show", for: .normal)
         showButton.setTitleColor(.systemBlue, for: .normal)
         showButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
         showButton.titleLabel?.textAlignment = .right
-        view.addSubview(showButton)
-        setShowButtonConstraints()
         showButton.addTarget(self, action: #selector(showButtonDidTap), for: .touchUpInside)
-    }
-    
-    func setShowButtonConstraints() {
+        
         showButton.translatesAutoresizingMaskIntoConstraints = false
         showButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 18).isActive = true
         showButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
@@ -88,40 +74,30 @@ class MainViewController: UIViewController {
     
     func configureTableView() {
         view.addSubview(tableView)
-        setTableViewDelegates()
-        setTableViewConstraints()
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.register(AddItemCell.self, forCellReuseIdentifier: AddItemCell.identifier)
         tableView.layer.cornerRadius = 16
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68.0
-    }
-    
-    func setTableViewDelegates() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    func setTableViewConstraints() {
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: doneLabel.bottomAnchor,constant: 12).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -56).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-
+    
     func configureAddButton() {
         view.addSubview(addButton)
-        setAddButtonConstraints()
         addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
         addButton.setImage(UIImage(named: "newTaskButton"), for: .normal)
         addButton.layer.shadowColor = UIColor(named: "addButtonShadowColor")?.cgColor
         addButton.layer.shadowOpacity = 0.3
         addButton.layer.shadowOffset = .zero
         addButton.layer.shadowRadius = 20
-    }
-    
-    func setAddButtonConstraints() {
+        
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54).isActive = true
@@ -132,11 +108,6 @@ class MainViewController: UIViewController {
         let navigationViewController = UINavigationController(rootViewController: rootViewController)
         present(navigationViewController, animated: true)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -155,15 +126,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! TaskCell
-        let todo = FileCache.instance.todos[indexPath.row]
-        cell.dateLabel?.text = todo.deadline?.description ?? "No date"
-        cell.taskLabel?.text = todo.text
-        if todo.isDone == true {
-            cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
-        } else {
-            cell.radioButton.setImage(UIImage(named: "radioButtonDefault"), for: .normal)
-        }
-        return cell
+            let todo = FileCache.instance.todos[indexPath.row]
+            cell.dateLabel?.text = todo.deadline?.description ?? "No date"
+            cell.taskLabel?.text = todo.text
+            if todo.isDone == true {
+                cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
+            } else {
+                cell.radioButton.setImage(UIImage(named: "radioButtonDefault"), for: .normal)
+            }
+            return cell
         }
     }
     
@@ -177,8 +148,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let doneAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-//            let todoID = FileCache.instance.todos[indexPath.row].id
-//            FileCache.instance[todoID]?.isDone.toggle()
+            //            let todoID = FileCache.instance.todos[indexPath.row].id
+            //            FileCache.instance[todoID]?.isDone.toggle()
             completionHandler(true)
         }
         doneAction.image = UIImage(systemName: "checkmark.circle.fill")
@@ -217,8 +188,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     
-    private func tableView(tableView: UITableView,
-                           heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }

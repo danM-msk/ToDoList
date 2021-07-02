@@ -15,8 +15,8 @@ extension ToDoItem: JSONable {
                     "id": id,
                     "text": text
                 ]
-                if priority != .normal {
-                    itemDictionary["priority"] = priority.json
+                if importance != .normal {
+                    itemDictionary["priority"] = importance.json
                 }
                 if let deadline = deadline {
                     itemDictionary["deadline"] = String(deadline.timeIntervalSince1970 / 100000 * 100000)
@@ -44,11 +44,11 @@ extension ToDoItem: JSONable {
             }
             guard let id = dict["id"] else { return nil }
             guard let text = dict["text"] else { return nil }
-            var priority: ToDoItemPriority?
+            var priority: ToDoItemImportance?
             var deadline: Date?
             
             if let priorityString = dict["priority"] {
-                priority = ToDoItemPriority.parse(json: priorityString)
+                priority = ToDoItemImportance.parse(json: priorityString)
             }
             if let deadlineString = dict["deadline"] {
                 if let utc = TimeInterval.init(deadlineString) {
