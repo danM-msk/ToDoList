@@ -11,7 +11,7 @@ class MainViewController: UIViewController {
     
     public static let instance = MainViewController()
     
-    var tableView = UITableView()
+    var tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
     let addButton = UIButton()
     let titleLabel = UILabel()
     let doneLabel = UILabel()
@@ -57,15 +57,17 @@ class MainViewController: UIViewController {
     
     func configureShowButton() {
         view.addSubview(showButton)
-        showButton.setTitle("Show", for: .normal)
+        showButton.setTitle("Показать", for: .normal)
         showButton.setTitleColor(.systemBlue, for: .normal)
         showButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        showButton.titleLabel?.textAlignment = .right
+        showButton.contentHorizontalAlignment = .right
         showButton.addTarget(self, action: #selector(showButtonDidTap), for: .touchUpInside)
         
         showButton.translatesAutoresizingMaskIntoConstraints = false
         showButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 18).isActive = true
         showButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+        showButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        showButton.widthAnchor.constraint(equalToConstant: 148).isActive = true
     }
     
     @objc func showButtonDidTap() {
@@ -78,14 +80,13 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.register(AddItemCell.self, forCellReuseIdentifier: AddItemCell.identifier)
-        tableView.layer.cornerRadius = 16
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68.0
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: doneLabel.bottomAnchor,constant: 12).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        tableView.topAnchor.constraint(equalTo: showButton.bottomAnchor, constant: 6).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
@@ -127,11 +128,27 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! TaskCell
             let todo = FileCache.instance.todos[indexPath.row]
-            cell.dateLabel?.text = todo.deadline?.description ?? "No date"
-            cell.taskLabel?.text = todo.text
-            if todo.isDone == true {
-                cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
+            
+            if todo.deadline == nil {
+                cell.dateLabel.isHidden = true
             } else {
+                cell.dateLabel.isHidden = false
+            }
+            
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(systemName: "calendar")
+            let fullString = NSMutableAttributedString(attachment: imageAttachment)
+            fullString.append(NSAttributedString(string: todo.deadline?.description ?? "No date"))
+            cell.dateLabel?.attributedText = fullString
+            
+            if todo.isDone == true {
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: todo.text)
+                    attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.textLabel?.attributedText = attributeString
+                cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            } else {
+                cell.taskLabel?.text = todo.text
                 cell.radioButton.setImage(UIImage(named: "radioButtonDefault"), for: .normal)
             }
             return cell

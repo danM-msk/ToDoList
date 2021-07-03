@@ -10,22 +10,19 @@ import Foundation
 class FileCache {
     
     private var cache = [
-        ToDoItem(text: "Test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test testtest test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ", priority: .important, deadline: Date().addWeek(1), isDone: false),
-        ToDoItem(text: "test2", priority: .important, deadline: nil, isDone: false),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "test3", priority: .normal, deadline: nil, isDone: true)
+        ToDoItem(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", priority: .normal, deadline: nil, isDone: false),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is unimportant", priority: .unimportant, deadline: nil, isDone: false),
+        ToDoItem(text: "This task has is important and has deadline", priority: .important, deadline: Date().addWeek(1), isDone: false),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
+        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true)
     ]
     
     public static let instance = FileCache()

@@ -10,12 +10,12 @@ import UIKit
 class AddTaskViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
-        let mainView = UIScrollView()
-        mainView.insetsLayoutMarginsFromSafeArea = true
-        mainView.contentInsetAdjustmentBehavior = .always
-        mainView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
-        mainView.backgroundColor = .clear
-        return mainView
+        let scrollView = UIScrollView()
+        scrollView.insetsLayoutMarginsFromSafeArea = true
+        scrollView.contentInsetAdjustmentBehavior = .always
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        scrollView.backgroundColor = .clear
+        return scrollView
     }()
     
     var textField = UITextFieldExtension()
@@ -150,6 +150,7 @@ class AddTaskViewController: UIViewController {
         importanceLabel.text = "Важность"
         importanceLabel.textAlignment = .left
         importanceLabel.font = UIFont.systemFont(ofSize: 17)
+        
         importanceLabel.translatesAutoresizingMaskIntoConstraints = false
         importanceLabel.centerYAnchor.constraint(equalTo: importanceView.centerYAnchor).isActive = true
         importanceLabel.leftAnchor.constraint(equalTo: importanceView.leftAnchor, constant: 16).isActive = true
@@ -159,6 +160,7 @@ class AddTaskViewController: UIViewController {
     func configureImportanceSegmentedControl() {
         importanceView.addSubview(importanceSegmentedControl)
         importanceSegmentedControl.setEnabled(true, forSegmentAt: 1)
+        
         importanceSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         importanceSegmentedControl.centerYAnchor.constraint(equalTo: importanceView.centerYAnchor).isActive = true
         importanceSegmentedControl.trailingAnchor.constraint(equalTo: importanceView.trailingAnchor, constant: -12).isActive = true
