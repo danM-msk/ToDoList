@@ -9,7 +9,7 @@ import UIKit
 
 class AddItemCell: UITableViewCell, UITextFieldDelegate {
 
-    var onTextDidChange: ((String) -> Void)?
+    var onTextDidChange: ((_ with: String) -> Void)?
     static let identifier: String = "AddItemCell"
 
     private var textField: UITextField = {

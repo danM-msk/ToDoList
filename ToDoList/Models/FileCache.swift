@@ -9,21 +9,7 @@ import Foundation
 
 class FileCache {
     
-    private var cache = [
-        ToDoItem(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", priority: .normal, deadline: nil, isDone: false),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is unimportant", priority: .unimportant, deadline: nil, isDone: false),
-        ToDoItem(text: "This task has is important and has deadline", priority: .important, deadline: Date().addWeek(1), isDone: false),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true),
-        ToDoItem(text: "This task is done", priority: .normal, deadline: nil, isDone: true)
-    ]
+    var cache = [ToDoItem]()
     
     public static let instance = FileCache()
     
@@ -32,11 +18,7 @@ class FileCache {
     }
     
     public var activeTodos: [ToDoItem] {
-        get { self.cache.filter { $0.isDone == true } }
-    }
-    
-    public var count: Int {
-        get { self.cache.count }
+        get { self.cache.filter { $0.completed != true } }
     }
     
     subscript(uuid: String) -> ToDoItem? {
@@ -106,5 +88,7 @@ class FileCache {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    
+    
     
 }

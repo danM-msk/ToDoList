@@ -9,6 +9,8 @@ import UIKit
 
 class AddTaskViewController: UIViewController {
     
+    let networkingService = DefaultNetworkingService.instance
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.insetsLayoutMarginsFromSafeArea = true
@@ -29,7 +31,7 @@ class AddTaskViewController: UIViewController {
     let datePicker = UIDatePicker()
     let deleteButton = UIButton()
     
-    var importanceState: ToDoItemImportance = .normal
+    public var completion: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,27 +78,35 @@ class AddTaskViewController: UIViewController {
     
     @objc func saveButtonDidTap() {
         saveTask()
-        print(FileCache.instance.todos.description)
-        dismiss(animated: true, completion: nil)
-        MainViewController.instance.tableView.reloadData()
+        dismiss(animated: true, completion: completion)
+        print(FileCache.instance.cache)
     }
     
     func saveTask() {
-        detectImportanceState()
-        let item = ToDoItem(text: "Без заголовка", priority: importanceState, deadline: datePicker.date, isDone: false)
+        guard let content = textField.text, content.count > 0 else { return } // TODO: inplement UIAlertView
+        let item = ToDoItem(text: content, completed: false, importance: importanceStateFromSegmentedControl(), deadline: datePicker.date)
         FileCache.instance.addToDo(item)
+        
+        networkingService.createItem(item) { result in
+            switch result {
+            case .success(_):
+                print("success")
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
-    func detectImportanceState() {
+    func importanceStateFromSegmentedControl() -> Importance {
         switch importanceSegmentedControl.selectedSegmentIndex {
         case 0:
-            importanceState = .unimportant
+            return .unimportant
         case 1:
-            importanceState = .normal
+            return .default
         case 2:
-            importanceState = .important
+            return .important
         default:
-            importanceState = .normal
+            return .default
         }
     }
     

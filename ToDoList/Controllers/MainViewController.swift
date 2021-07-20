@@ -8,14 +8,15 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
-    public static let instance = MainViewController()
-    
+        
     var tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
     let addButton = UIButton()
     let titleLabel = UILabel()
     let doneLabel = UILabel()
     let showButton = UIButton()
+    let networkingService = DefaultNetworkingService.instance
+    
+    private var showDoneToDos = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,10 @@ class MainViewController: UIViewController {
         configureShowButton()
         configureTableView()
         configureAddButton()
+    }
+    
+    public func reloadTableViewData() {
+        tableView.reloadData()
     }
     
     func configureView() {
@@ -71,14 +76,15 @@ class MainViewController: UIViewController {
     }
     
     @objc func showButtonDidTap() {
-        print("Tapped")
+        showDoneToDos.toggle()
+        tableView.reloadData()
     }
     
     func configureTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
+        tableView.register(UINib(nibName: TaskCell.cellNibName, bundle: nil), forCellReuseIdentifier: TaskCell.identifier)
         tableView.register(AddItemCell.self, forCellReuseIdentifier: AddItemCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 68.0
@@ -105,9 +111,13 @@ class MainViewController: UIViewController {
     }
     
     @objc func addButtonDidTap() {
-        let rootViewController = AddTaskViewController()
-        let navigationViewController = UINavigationController(rootViewController: rootViewController)
+        let addViewController = AddTaskViewController()
+        addViewController.completion = {
+            self.tableView.reloadData()
+        }
+        let navigationViewController = UINavigationController(rootViewController: addViewController)
         present(navigationViewController, animated: true)
+        
     }
 }
 
@@ -116,7 +126,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FileCache.instance.count + 1
+        return showDoneToDos ? FileCache.instance.todos.count + 1 : FileCache.instance.activeTodos.count + 1
     }
     
     
@@ -124,38 +134,27 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: AddItemCell.identifier, for: indexPath) as! AddItemCell
-            return cell
-        } else {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! TaskCell
-            let todo = FileCache.instance.todos[indexPath.row]
-            
-            if todo.deadline == nil {
-                cell.dateLabel.isHidden = true
-            } else {
-                cell.dateLabel.isHidden = false
-            }
-            
-            let imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(systemName: "calendar")
-            let fullString = NSMutableAttributedString(attachment: imageAttachment)
-            fullString.append(NSAttributedString(string: todo.deadline?.description ?? "No date"))
-            cell.dateLabel?.attributedText = fullString
-            
-            if todo.isDone == true {
-                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: todo.text)
-                    attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-                cell.textLabel?.attributedText = attributeString
-                cell.radioButton.setImage(UIImage(named: "radioButtonDone"), for: .normal)
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            } else {
-                cell.taskLabel?.text = todo.text
-                cell.radioButton.setImage(UIImage(named: "radioButtonDefault"), for: .normal)
+            cell.onTextDidChange = { text in
+                let task = ToDoItem(text: text, completed: false, importance: .default, createdAt: Date().timeIntervalSince1970.toInt() ?? 0)
+                self.networkingService.createItem(task) { result in
+                    switch result {
+                    case .success(_):
+                        print("success")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             }
             return cell
         }
+        
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: TaskCell.identifier, for: indexPath) as! TaskCell
+        
+        cell.todo = showDoneToDos ? FileCache.instance.todos[indexPath.row] : FileCache.instance.activeTodos[indexPath.row]
+        
+        return cell
     }
-    
-    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -165,8 +164,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let doneAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            //            let todoID = FileCache.instance.todos[indexPath.row].id
-            //            FileCache.instance[todoID]?.isDone.toggle()
+//                        let todoID = FileCache.instance.todos[indexPath.row].id
+//                        FileCache.instance[todoID]?.isDone.toggle()
             completionHandler(true)
         }
         doneAction.image = UIImage(systemName: "checkmark.circle.fill")
@@ -181,8 +180,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            let todoID = FileCache.instance.todos[indexPath.row].id
+            let todoID = self.showDoneToDos ? FileCache.instance.todos[indexPath.row].id : FileCache.instance.activeTodos[indexPath.row].id
             FileCache.instance.removeToDo(uuid: todoID)
+            self.networkingService.deleteItem(with: todoID) { result in
+                switch result {
+                case .success(_):
+                    print("success")
+                case .failure(let error):
+                    print(error)
+                }
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
@@ -190,8 +197,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         deleteAction.backgroundColor = .systemRed
         
         let infoAction = UIContextualAction(style: .normal, title: nil) { (_, _, completionHandler) in
-            let viewControllerToPresent = AddTaskViewController()
-            self.present(viewControllerToPresent, animated: true, completion: nil)
+//            let viewControllerToPresent = AddTaskViewController()
+//            self.present(viewControllerToPresent, animated: true, completion: nil)
             completionHandler(true)
         }
         infoAction.image = UIImage(systemName: "info.circle.fill")
