@@ -46,31 +46,6 @@ struct ToDoItem {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
-    
-//    init(withDTO dto: ToDoItemDTO) throws {
-//        guard let importance = Importance(rawValue: dto.importance) else {
-//            throw ToDoItemError.failedToCreateImportance(dto.importance)
-//        }
-//
-//        self.id = dto.id
-//        self.text = dto.text
-//        self.importance = importance
-//        self.completed = dto.completed
-//
-//        if let deadlineTimestamp = dto.deadlineTimestamp {
-//            self.deadline = Date(timeIntervalSince1970: Double(deadlineTimestamp))
-//        } else {
-//            self.deadline = nil
-//        }
-//
-//        self.createdAt = Int(Date(timeIntervalSince1970: Double(dto.createdAtTimestamp)))
-//
-//        if let updatedAtTimestamp = dto.updatedAtTimestamp {
-//            self.updatedAt = Int(Date(timeIntervalSince1970: Double(updatedAtTimestamp))
-//        } else {
-//            self.updatedAt = nil
-//        }
-//    }
 }
 
 extension ToDoItem {
@@ -99,22 +74,6 @@ extension ToDoItem {
         )
     }
 }
-
-//extension ToDoItem {
-//
-//    var asDto: ToDoItemDTO {
-//        return ToDoItemDTO(
-//            id: id,
-//            text: text,
-//            completed: completed,
-//            importance: importance.rawValue,
-//            deadlineTimestamp: (deadline?.timeIntervalSince1970).map(Int64.init),
-//            createdAtTimestamp: Int64(createdAt.timeIntervalSince1970),
-//            updatedAtTimestamp: (updatedAt?.timeIntervalSince1970).map(Int64.init)
-//        )
-//    }
-//}
-
 
 extension ToDoItem: Codable {
     enum CodingKeys: String, CodingKey {

@@ -11,10 +11,6 @@ typealias ToDoItemResult = Result<ToDoItem, NetworkingServiceError>
 typealias ToDoItemsResult = Result<[ToDoItem], NetworkingServiceError>
 
 protocol NetworkingService {
-//    
-//    func getItems(
-//        completion: @escaping (ToDoItemsResult) -> Void
-//    )
     
     func createItem(
         _ toDoItem: ToDoItem,
