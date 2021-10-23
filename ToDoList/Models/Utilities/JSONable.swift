@@ -8,6 +8,6 @@
 import Foundation
 
 protocol JSONable {
-    var json: Any { get }
+    var json: Any? { get }
     static func parse(json: Any) -> Self?
 }
